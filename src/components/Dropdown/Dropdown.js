@@ -7,7 +7,7 @@ const DropDown = (props) => {
     const [position, setPosition] = useState(-1);
 
     const clickHandler = () => {
-        setIsOpen(!isOpen);
+        setIsOpen((!isOpen));
     }
 
     const keyPressHandler = () => {
@@ -15,7 +15,7 @@ const DropDown = (props) => {
         if(isOpen && position !== -1){
             setSelectedOption(props.options[position]);
         }
-        setIsOpen(false);
+        setIsOpen((currentOpen => !currentOpen));
     }
 
     const optionSelectHandler = (value) => {
