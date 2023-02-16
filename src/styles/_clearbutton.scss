@@ -1,0 +1,22 @@
+.clearbutton {
+    position: relative;
+    padding: 12px 16px;
+    border: 2px solid $black;
+    border-radius: 5px;
+    width: 300px;
+    cursor: pointer;
+    color: $black;
+    font-weight: bold;
+    box-shadow: 2px 2px 2px $gray;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    box-sizing: border-box;
+
+    &:hover {
+        background-color: $yellow;
+    }
+}

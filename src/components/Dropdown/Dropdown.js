@@ -22,8 +22,17 @@ const DropDown = (props) => {
     }
 
     useEffect(() => {
+        if(props.clearValue === true){
+            setSelectedOption({name: '', value: ''});
+            props.cleared(true);
+        }
+    }, [props.clearValue])
+
+    useEffect(() => {
         if(selectedOption.name !== '' && selectedOption.name !== props.value.name){
-            props.onChange('changed!')
+            var event = new Event('change');
+            Object.defineProperty(event, 'target', {writable: false, value: 'dropdown'});
+            props.onChange(event)
         }
     }, [selectedOption])
 
@@ -35,10 +44,19 @@ const DropDown = (props) => {
 
     useEffect(() => {
         window.addEventListener('click', clickListener);
+        window.addEventListener("keypress", function(event) {
+            // If the user presses the "Enter" key on the keyboard
+            if (event.key === "Enter") {
+              // Cancel the default action, if needed
+              event.preventDefault();
+              // Trigger the button element with a click
+              setIsOpen(true);
+            }
+          });
     }, [])
 
     return (
-        <ul className="dropDownContainer" onClick={clickHandler}>
+        <ul className="dropDownContainer" onClick={clickHandler} autofocus>
             <div className={`dropDownContainer-selector ${isOpen ? 'clicked ' : ' '} ${selectedOption.name !== undefined && selectedOption.name !== null && selectedOption.name !== '' ? 'selected' : ''}`}>
                 {selectedOption.name === '' ? (props.placeholder !== undefined ? props.placeholder : 'Dropdown!') : selectedOption.name}
                 <div className="dropDownContainer-selector-arrow">

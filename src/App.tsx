@@ -1,10 +1,9 @@
 import './styles/app.scss'
-import Dropdown from "./components/Dropdown/Dropdown";
-import data from './data/mockdata.json';
+import Form from './components/Form';
 
 const App = () => (  
   <>
-    <Dropdown placeholder="Choose an animal" options={data} value={data[1]} onChange={(e:any) => console.log(e)} />
+    <Form />
   </>
 );
 

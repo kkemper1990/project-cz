@@ -2,6 +2,7 @@
     position: relative;
     z-index: 1;
     width: 300px;
+    padding-left: 0;
 
     &-selector {
         position: relative;
@@ -53,6 +54,7 @@
     flex-direction: column;
     box-shadow: 2px 2px 2px $gray;
     width: 300px;
+    position: absolute;
 
     &-option {
         position: relative;
