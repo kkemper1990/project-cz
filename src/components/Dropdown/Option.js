@@ -4,7 +4,7 @@ const Option = (props) => {
     }
 
     return (
-        <li className="optionContainer-option" onClick={clickHandler} aria-label={props.name} aria-required="true">
+        <li className={`optionContainer-option ${props.positioned ? 'position' : ''}`} onClick={clickHandler} aria-label={props.name} aria-required="true">
             {props.name}
         </li>
     )

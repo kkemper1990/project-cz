@@ -79,5 +79,9 @@
         &:last-child {
             border-radius: 0 0 5px 5px;
         }
+
+        &.position {
+            background-color: rgba($yellow, 1);
+        }
     }
 }

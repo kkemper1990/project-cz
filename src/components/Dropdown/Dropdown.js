@@ -4,9 +4,18 @@ import Options from "./Options";
 const DropDown = (props) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState({name: '', value: ''});
+    const [position, setPosition] = useState(-1);
 
     const clickHandler = () => {
         setIsOpen(!isOpen);
+    }
+
+    const keyPressHandler = () => {
+        console.log(position)
+        if(isOpen && position !== -1){
+            setSelectedOption(props.options[position]);
+        }
+        setIsOpen(false);
     }
 
     const optionSelectHandler = (value) => {
@@ -45,6 +54,10 @@ const DropDown = (props) => {
         }
     }, [props.value])
 
+    useEffect(()=> {
+        console.log(isOpen)
+    }, [isOpen]);
+
     // create event listeners for click on document and enter keypress
     useEffect(() => {
         window.addEventListener('click', clickListener);
@@ -53,21 +66,32 @@ const DropDown = (props) => {
             if (event.key === "Enter") {
               // Cancel the default action, if needed
               event.preventDefault();
-              // Trigger the button element with a click
-              setIsOpen(true);
+              event.stopImmediatePropagation();
+
+              // Trigger the element with a click
+              keyPressHandler();
             }
           });
     }, [])
 
+    document.onkeydown = (e) => {
+        e = e || window.event;
+        if (e.keyCode === 40 && position >= -1 && position < props.options.length - 1 && isOpen) {
+            setPosition(position + 1);
+        } else if (e.keyCode === 38 && position <= props.options.length - 1 && position > 0 && isOpen) {
+            setPosition(position - 1);
+        }
+    }
+
     return (
-        <ul className="dropDownContainer" onClick={clickHandler} autofocus aria-label={props.placeholder} aria-required="true">
+        <ul className="dropDownContainer" onClick={clickHandler} autoFocus aria-label={props.placeholder} aria-required="true">
             <div className={`dropDownContainer-selector ${isOpen ? 'clicked ' : ' '} ${selectedOption.name !== undefined && selectedOption.name !== null && selectedOption.name !== '' ? 'selected' : ''}`}>
                 {selectedOption.name === '' ? (props.placeholder !== undefined ? props.placeholder : 'Dropdown!') : selectedOption.name}
                 <div className="dropDownContainer-selector-arrow">
                     <img src="/arrow-down.svg" />
                 </div>
             </div>
-            <Options visibility={isOpen} clicked={isOpen} optionSelect={optionSelectHandler} data={props.options} />
+            <Options visibility={isOpen} clicked={isOpen} optionSelect={optionSelectHandler} data={props.options} position={position} />
         </ul>
     )
 }

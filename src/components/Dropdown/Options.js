@@ -15,7 +15,7 @@ const Options = (props) => {
     return (
         <div className={`optionContainer ${props.clicked ? 'clicked' : ''}`}style={{visibility: props.visibility === true ? 'visible' : 'hidden', display: props.visibility === true ? 'block' : 'none'}}>
             {data.map((item, index) => (
-                <Option key={index} name={item.name} value={item.value} onClick={clickHandler} />
+                <Option key={index} name={index + " - " +item.name} value={item.value} onClick={clickHandler} positioned={index === props.position ? true : false} />
             ))}
         </div>
     )
