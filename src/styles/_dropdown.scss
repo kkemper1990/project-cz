@@ -1,0 +1,28 @@
+.dropDownContainer {
+    position: relative;
+    padding: 12px 16px;
+    border: 2px solid $black;
+    border-radius: 5px;
+    width: 300px;
+    cursor: pointer;
+    color: $gray;
+    font-weight: bold;
+
+    .arrow {
+        position: absolute;
+        right: 16px;
+        top: 9px;
+        height: 24px;
+        width: 24px;
+        border: 2px solid $black;
+        border-radius: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 12px;
+
+        img {
+            height: 10px;
+        }
+    }
+}
