@@ -22,19 +22,31 @@ const DropDown = (props) => {
     }
 
     useEffect(() => {
+        if(selectedOption.name !== '' && selectedOption.name !== props.value.name){
+            props.onChange('changed!')
+        }
+    }, [selectedOption])
+
+    useEffect(() => {
+        if(props.value !== undefined) {
+            setSelectedOption(props.value);
+        }
+    }, [props.value])
+
+    useEffect(() => {
         window.addEventListener('click', clickListener);
     }, [])
 
     return (
-        <div className="dropDownContainer" onClick={clickHandler}>
+        <ul className="dropDownContainer" onClick={clickHandler}>
             <div className={`dropDownContainer-selector ${isOpen ? 'clicked ' : ' '} ${selectedOption.name !== undefined && selectedOption.name !== null && selectedOption.name !== '' ? 'selected' : ''}`}>
                 {selectedOption.name === '' ? (props.placeholder !== undefined ? props.placeholder : 'Dropdown!') : selectedOption.name}
                 <div className="dropDownContainer-selector-arrow">
                     <img src="/arrow-down.svg" />
                 </div>
             </div>
-            <Options visibility={isOpen} clicked={isOpen} optionSelect={optionSelectHandler} data={props.data} />
-        </div>
+            <Options visibility={isOpen} clicked={isOpen} optionSelect={optionSelectHandler} data={props.options} />
+        </ul>
     )
 }
 

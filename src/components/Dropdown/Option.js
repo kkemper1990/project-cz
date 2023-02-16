@@ -4,9 +4,9 @@ const Option = (props) => {
     }
 
     return (
-        <div className="optionContainer-option" onClick={clickHandler}>
+        <li className="optionContainer-option" onClick={clickHandler}>
             {props.name}
-        </div>
+        </li>
     )
 }
 
