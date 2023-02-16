@@ -21,6 +21,7 @@ const DropDown = (props) => {
         }
     }
 
+    // when the clearvalue functionality is active, clear the value
     useEffect(() => {
         if(props.clearValue === true){
             setSelectedOption({name: '', value: ''});
@@ -28,6 +29,7 @@ const DropDown = (props) => {
         }
     }, [props.clearValue])
 
+    // create a new change event
     useEffect(() => {
         if(selectedOption.name !== '' && selectedOption.name !== props.value.name){
             var event = new Event('change');
@@ -36,12 +38,14 @@ const DropDown = (props) => {
         }
     }, [selectedOption])
 
+    // if value prop is filled, select it
     useEffect(() => {
         if(props.value !== undefined) {
             setSelectedOption(props.value);
         }
     }, [props.value])
 
+    // create event listeners for click on document and enter keypress
     useEffect(() => {
         window.addEventListener('click', clickListener);
         window.addEventListener("keypress", function(event) {
