@@ -11,8 +11,7 @@ const DropDown = (props) => {
     }
 
     const keyPressHandler = () => {
-        console.log(position)
-        if(isOpen && position !== -1){
+        if(position !== -1){
             setSelectedOption(props.options[position]);
         }
         setIsOpen((currentOpen => !currentOpen));
@@ -54,10 +53,6 @@ const DropDown = (props) => {
         }
     }, [props.value])
 
-    useEffect(()=> {
-        console.log(isOpen)
-    }, [isOpen]);
-
     // create event listeners for click on document and enter keypress
     useEffect(() => {
         window.addEventListener('click', clickListener);
@@ -77,9 +72,9 @@ const DropDown = (props) => {
     document.onkeydown = (e) => {
         e = e || window.event;
         if (e.keyCode === 40 && position >= -1 && position < props.options.length - 1 && isOpen) {
-            setPosition(position + 1);
+            setPosition((oldPosition => oldPosition + 1));
         } else if (e.keyCode === 38 && position <= props.options.length - 1 && position > 0 && isOpen) {
-            setPosition(position - 1);
+            setPosition((oldPosition => oldPosition - 1));
         }
     }
 
