@@ -60,7 +60,7 @@ const DropDown = (props) => {
     }, [])
 
     return (
-        <ul className="dropDownContainer" onClick={clickHandler} autofocus>
+        <ul className="dropDownContainer" onClick={clickHandler} autofocus aria-label={props.placeholder} aria-required="true">
             <div className={`dropDownContainer-selector ${isOpen ? 'clicked ' : ' '} ${selectedOption.name !== undefined && selectedOption.name !== null && selectedOption.name !== '' ? 'selected' : ''}`}>
                 {selectedOption.name === '' ? (props.placeholder !== undefined ? props.placeholder : 'Dropdown!') : selectedOption.name}
                 <div className="dropDownContainer-selector-arrow">
